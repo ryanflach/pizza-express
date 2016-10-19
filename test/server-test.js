@@ -39,7 +39,7 @@ describe('Server', () => {
       var title = app.locals.title;
 
       this.request.get('/', (error, response) => {
-        if(error) { done(error); }
+        if (error) { done(error); }
         assert(response.body.includes(title), `"${response.body}" does not include "${title}".`);
         done();
       });
@@ -48,6 +48,10 @@ describe('Server', () => {
   });
 
   describe('POST /pizzas', () => {
+
+    beforeEach(() => {
+      app.locals.pizzas = {};
+    });
 
     it('should not return a status of 404', (done) => {
       this.request.post('/pizzas', (error, response) => {
@@ -58,9 +62,22 @@ describe('Server', () => {
     });
 
     it('should receive and store data', (done) => {
+      var validPizza = {
+        pizza: {
+          name: 'A vegetable pizza',
+          toppings: ['mushrooms', 'onions', 'garlic', 'black olives']
+        }
+      };
 
-      assert(true);
-      done();
+      this.request.post('/pizzas', { form: validPizza }, (error, response) => {
+        if (error) { done(error); }
+
+        var pizzaCount = Object.keys(app.locals.pizzas).length;
+
+        assert.equal(pizzaCount, 1, 'Expected 1 pizza, found ${pizzaCount}');
+
+        done();
+      });
     });
 
   });
