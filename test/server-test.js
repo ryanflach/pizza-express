@@ -78,4 +78,50 @@ describe('Server', () => {
 
   });
 
+  describe('GET /pizzas/:id', () => {
+
+    beforeEach(() => {
+      app.locals.pizzas.testPizza = fixtures.validPizza;
+    });
+
+    it('should return a status of 404 when pizza not found', (done) => {
+      this.request.get('/pizzas/123', (error, response) => {
+        if (error) { done(error); }
+        assert.equal(response.statusCode, 404);
+        done();
+      });
+    });
+
+    it('should return a status of 200 when pizza found', (done) => {
+      this.request.get('/pizzas/testPizza', (error, response) => {
+        if (error) { done(error); }
+        assert.equal(response.statusCode, 200);
+        done();
+      });
+    });
+
+    it('should return a page that has the title of the pizza', (done) => {
+      var pizza = app.locals.pizzas.testPizza;
+
+      this.request.get('/pizzas/testPizza', (error, response) => {
+        if (error) { done(error); }
+        assert(response.body.includes(pizza.name), `"${response.body}" does not include "${pizza.name}"`);
+        done();
+      });
+    });
+
+    it('should return a page that has the pizza toppings', (done) => {
+      var pizzaToppings = app.locals.pizzas.testPizza.toppings;
+
+      this.request.get('/pizzas/testPizza', (error, response) => {
+        if (error) { done(error); }
+        for (var i = 0; i < pizzaToppings.length; i++) {
+          assert(response.body.includes(pizzaToppings[i]), `"${response.body}" does not include "${pizzaToppings[i]}"`);
+        }
+        done();
+      });
+    });
+
+  });
+
 });
