@@ -17,5 +17,5 @@ node server.js
 ```
 Run the test suite with Mocha
 ```
-mocha
+npm test
 ```
