@@ -23,18 +23,19 @@ app.get('/pizzas/:id', (request, response) => {
 
   if (requestedPizza) {
     response.render('pizza', { pizza: requestedPizza });
-    response.sendStatus(200);
   } else {
     response.sendStatus(404);
   }
 });
 
 app.post('/pizzas', (request, response) => {
+  if (!request.body.pizza) { return response.sendStatus(400); }
+
   var id = generateId();
 
   app.locals.pizzas[id] = request.body;
 
-  response.sendStatus(201);
+  response.redirect('/pizzas/' + id);
 });
 
 // Only listen if the server is being accessed directly (i.e., not via the test suite)
