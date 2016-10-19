@@ -1,0 +1,28 @@
+{
+  "name": "pizza-express",
+  "version": "1.0.0",
+  "description": "A project exploring Express",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanflach/pizza-express.git"
+  },
+  "keywords": [
+    "express"
+  ],
+  "author": "Ryan Flach",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryanflach/pizza-express/issues"
+  },
+  "homepage": "https://github.com/ryanflach/pizza-express#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2"
+  }
+}
