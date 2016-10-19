@@ -5,7 +5,7 @@ app.set('port', process.env.PORT || 3000);
 app.locals.title = 'Pizza Express';
 
 app.get('/', (request, response) => {
-  response.send('Hello World!');
+  response.send(app.locals.title);
 });
 
 // Only listen if the server is being accessed directly (i.e., not via the test suite)
