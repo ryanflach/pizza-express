@@ -11,6 +11,10 @@ Install dependencies
 ```
 npm install
 ```
+Launch a local server
+```
+node server.js
+```
 Run the test suite with Mocha
 ```
 mocha
