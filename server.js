@@ -4,10 +4,11 @@ const path = require('path');
 
 app.use(express.static('static'));
 app.set('port', process.env.PORT || 3000);
+app.set('view engine', 'jade');
 app.locals.title = 'Pizza Express';
 
 app.get('/', (request, response) => {
-  response.sendFile(path.join(__dirname, '/static/index.html'));
+  response.render('index');
 });
 
 // Only listen if the server is being accessed directly (i.e., not via the test suite)
